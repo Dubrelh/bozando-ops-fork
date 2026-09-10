@@ -40,7 +40,7 @@ describe("mailer subscriber user notifications", () => {
       role: "viewer",
     })
 
-    const recipients = vi.mocked(mailerService.send).mock.calls.map((call) => call[2].to)
+    const recipients = (vi.mocked(mailerService.send) as any).mock.calls.map((call: any) => call[2]?.to)
     expect(recipients).toEqual(expect.arrayContaining(["owner@hullbay.io", "alice@hullbay.io"]))
   })
 
@@ -48,7 +48,7 @@ describe("mailer subscriber user notifications", () => {
     vi.mocked(prisma.user.findMany).mockResolvedValue([
       { email: "owner@hullbay.io" },
     ] as any)
-    vi.mocked(prisma.user.findUnique).mockImplementation(async ({ where }: any) => {
+    ;(vi.mocked(prisma.user.findUnique) as any).mockImplementation(async ({ where }: any) => {
       if (where.id === "actor-owner") return { email: "actor@hullbay.io" }
       if (where.id === "user-1") return { email: "alice@hullbay.io" }
       return null
@@ -61,7 +61,7 @@ describe("mailer subscriber user notifications", () => {
       role: "operator",
     })
 
-    const recipients = vi.mocked(mailerService.send).mock.calls.map((call) => call[2].to)
+    const recipients = (vi.mocked(mailerService.send) as any).mock.calls.map((call: any) => call[2]?.to)
     expect(recipients).toEqual(["alice@hullbay.io"])
   })
 
@@ -77,7 +77,7 @@ describe("mailer subscriber user notifications", () => {
       targetEmail: "alice@hullbay.io",
     })
 
-    const recipients = vi.mocked(mailerService.send).mock.calls.map((call) => call[2].to)
+    const recipients = (vi.mocked(mailerService.send) as any).mock.calls.map((call: any) => call[2]?.to)
     expect(recipients).toEqual(expect.arrayContaining(["owner@hullbay.io", "alice@hullbay.io"]))
   })
 })
