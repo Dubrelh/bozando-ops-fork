@@ -16,6 +16,7 @@ import { CanvasPage } from "./pages/CanvasPage"
 import { SettingsPage } from "./pages/SettingsPage"
 import { ServersPage } from "./pages/ServersPage"
 import { IntegrationsPage } from "./pages/IntegrationsPage"
+import { MailIntegrationPage } from "./pages/MailIntegrationPage"
 import { HealthPage } from "./pages/HealthPage"
 import { SecretsPage } from "./pages/SecretsPage"
 import { UpdatesPage } from "./pages/UpdatesPage"
@@ -53,6 +54,7 @@ export function App() {
             <Route path="/clusters" element={<ClustersPage />} />
             <Route path="/clusters/:clusterId"element={<ClusterDetailPage />}/>
             <Route path="/registries" element={<IntegrationsPage />} />
+            <Route path="/integrations/mail" element={<MailIntegrationPage />} />
             <Route path="/secrets" element={<SecretsPage />} />
             <Route path="/users" element={<UsersPage />} />
             <Route path="/audit" element={<AuditPage />} />

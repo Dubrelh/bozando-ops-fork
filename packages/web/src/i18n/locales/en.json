@@ -457,5 +457,35 @@
     "toast": {
       "passwordChanged": "Password changed"
     }
+    ,
+    "mail": {
+      "title": "Mail",
+      "providerLabel": "Provider",
+      "providerHelp": "Choose the email provider: Resend (API) or SMTP server.",
+      "defaultFromLabel": "Default From",
+      "resendApiKeyLabel": "Resend API key",
+      "resendApiKeyPlaceholder": "(never shown again)",
+      "resendApiKeyShow": "Show",
+      "smtpHostLabel": "SMTP host",
+      "smtpPortLabel": "SMTP port",
+      "smtpUserLabel": "SMTP user",
+      "smtpPassLabel": "SMTP password",
+      "secretsNote": "Secrets are stored encrypted and not returned by the server.",
+      "resendHelp": "Paste your Resend API key here. It will be stored encrypted.",
+      "smtpHelp": "SMTP host/port/user/password for your outgoing SMTP server. Password will be stored encrypted.",
+      "saveButton": "Save",
+      "testButton": "Send test email",
+      "testEmailLabel": "Test recipient",
+      "testEmailPlaceholder": "you@example.com",
+      "saveSuccess": "Mail settings saved",
+      "testSuccess": "Test email sent"
+    ,
+    "infoText": "Configure outbound email to enable notifications and test messages.",
+    "configureButton": "Configure email",
+    "configuredLabel": "Email configured",
+    "editButton": "Modify",
+    "testPassed": "Test succeeded",
+    "cancelButton": "Cancel"
+    }
   }
 }

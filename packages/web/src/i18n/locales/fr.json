@@ -461,5 +461,35 @@
     "toast": {
       "passwordChanged": "Mot de passe modifié"
     }
+    ,
+    "mail": {
+      "title": "Mail",
+      "providerLabel": "Fournisseur",
+      "providerHelp": "Choisis Resend (API) ou un serveur SMTP.",
+      "defaultFromLabel": "Expéditeur par défaut",
+      "resendApiKeyLabel": "Clé API Resend",
+      "resendApiKeyPlaceholder": "(jamais réaffichée)",
+      "resendApiKeyShow": "Afficher",
+      "smtpHostLabel": "Hôte SMTP",
+      "smtpPortLabel": "Port SMTP",
+      "smtpUserLabel": "Utilisateur SMTP",
+      "smtpPassLabel": "Mot de passe SMTP",
+      "secretsNote": "Les secrets sont chiffrés et ne sont pas renvoyés par le serveur.",
+      "resendHelp": "Colle ta clé API Resend ici. Elle sera stockée chiffrée.",
+      "smtpHelp": "Hôte/port/utilisateur/mot de passe SMTP pour ton serveur sortant. Le mot de passe sera chiffré.",
+      "saveButton": "Enregistrer",
+      "testButton": "Envoyer un e‑mail de test",
+      "testEmailLabel": "Destinataire de test",
+      "testEmailPlaceholder": "toi@exemple.com",
+      "saveSuccess": "Paramètres mail enregistrés",
+      "testSuccess": "E‑mail de test envoyé"
+    ,
+    "infoText": "Configure l'envoi d'e‑mails pour activer les notifications et les tests.",
+    "configureButton": "Configurer l'email",
+    "configuredLabel": "Email configuré",
+    "editButton": "Modifier",
+    "testPassed": "Test réussi",
+    "cancelButton": "Annuler"
+    }
   }
 }

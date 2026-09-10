@@ -101,6 +101,16 @@ model AuditLog {
   @@index([createdAt])
 }
 
+// Mail integration settings (stores encrypted provider config)
+model MailIntegration {
+  id          String   @id @default(cuid())
+  provider    String
+  configEnc   String
+  enabled     Boolean  @default(false)
+  defaultFrom String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 // ── Serveurs physiques du cluster Swarm (provisioning SSH one-shot) ──
 model Server {
   id            String   @id @default(cuid())

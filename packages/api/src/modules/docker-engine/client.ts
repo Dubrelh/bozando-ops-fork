@@ -1,4 +1,5 @@
 import Docker from "dockerode"
+import { lookup } from "node:dns/promises"
 import { ensureTunnel, closeTunnel } from "../../lib/ssh-tunnel"
 import { clusterService } from "../clusters/service"
 
@@ -18,6 +19,7 @@ import { clusterService } from "../clusters/service"
 
 const DOCKER_SOCKET_PATH =
   process.env.DOCKER_SOCKET_PATH || "/var/run/docker.sock"
+const DNS_LOOKUP_TIMEOUT_MS = 400
 
 const registry = new Map<string, Docker>()
 /** Créations en vol : partage la même Promise pour les appels concurrents. */
@@ -58,7 +60,24 @@ async function resolveConnectionParams(cluster: {
   dockerHost: string;
 }): Promise<DockerHostParams | null> {
   const parsed = parseDockerHost(cluster.dockerHost);
-  if (cluster.isDefault) return parsed;
+  if (cluster.isDefault) {
+    if (!parsed) return null;
+    if (parsed.host === "socket-proxy") {
+      try {
+        await Promise.race([
+          lookup(parsed.host),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("DNS lookup timeout")), DNS_LOOKUP_TIMEOUT_MS)),
+        ])
+        return parsed;
+      } catch {
+        // Fallback local : lorsque l'API tourne hors du réseau Docker Compose,
+        // le nom docker service n'est pas résolu depuis l'hôte et le proxy ne
+        // l'est pas accessible. On retombe alors sur le socket local.
+        return null;
+      }
+    }
+    return parsed;
+  }
   const remotePort = parsed?.port ?? 2375;
   const localPort = await ensureTunnel(cluster.id, remotePort);
   // Tunnel SSH → forward TCP brut : le protocol d'origine est conservé (http
