@@ -483,6 +483,11 @@ export type NodeHealth = {
   state: string;
   availability: string;
   leader: boolean;
+  memoryBytes: number;
+  nanoCpus: number;
+  os: string;
+  architecture: string;
+  dockerVersion: string;
 };
 
 export type ServicePlacement = {
@@ -513,6 +518,12 @@ export type ClusterHealth = {
   swarmActive: boolean;
   nodes: NodeHealth[];
   services: ServiceHealth[];
+  diskUsage: {
+    layersSize: number;
+    images: number;
+    containers: number;
+    volumes: number;
+  };
 };
 
 export type DriftEntry = {
@@ -543,6 +554,19 @@ export type ManagerHealth = {
   quorumOk: boolean;
 };
 
+export type SystemInfoSnapshot = {
+  os: string | null;
+  kernel: string | null;
+  cpuCores: number | null;
+  ramTotalMb: number | null;
+  ramUsedMb: number | null;
+  swapTotalMb: number | null;
+  swapUsedMb: number | null;
+  diskTotalGb: number | null;
+  diskUsedGb: number | null;
+  collectedAt: string;
+};
+
 export type Server = {
   id: string;
   name: string;
@@ -554,6 +578,7 @@ export type Server = {
   swarmNodeId: string | null;
   lastError: string | null;
   clusterId: string;
+  systemInfo: SystemInfoSnapshot | null;
 };
 
 export type UpdateChannel = "stable" | "beta";

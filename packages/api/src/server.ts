@@ -29,6 +29,7 @@ import { registerDeploySubscribers } from "./subscribers/on-deploy-finished";
 import { registerMailSubscribers } from "./subscribers/mailer";
 import { startDriftJob } from "./jobs/reconcile-drift";
 import { startAutoScaler } from "./jobs/auto-scaler";
+import { startClusterHealthJob } from "./jobs/cluster-health";
 import fastify, { type FastifyInstance } from "fastify";
 import { stopTunnelCleanup, closeAllTunnels } from "./lib/ssh-tunnel";
 import { registerClustersRoutes } from "./modules/clusters/routes";
@@ -193,6 +194,7 @@ app.setErrorHandler((error: FastifyError, request, reply) => {
     registerMailSubscribers();
     startDriftJob();
     startAutoScaler();
+    startClusterHealthJob();
   }
   return app;
 }
